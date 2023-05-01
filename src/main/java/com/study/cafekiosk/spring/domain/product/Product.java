@@ -23,6 +23,7 @@ public class Product extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ProductType type;
 
+    @Enumerated(EnumType.STRING)
     private ProductSellingStatus sellingStatus;
 
     private String name;
