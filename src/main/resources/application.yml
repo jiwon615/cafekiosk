@@ -48,4 +48,3 @@ spring:
     init:
       mode: never
 
-
