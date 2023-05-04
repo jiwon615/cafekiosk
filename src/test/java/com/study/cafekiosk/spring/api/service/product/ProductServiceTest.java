@@ -6,6 +6,7 @@ import com.study.cafekiosk.spring.domain.product.Product;
 import com.study.cafekiosk.spring.domain.product.ProductRepository;
 import com.study.cafekiosk.spring.domain.product.ProductSellingStatus;
 import com.study.cafekiosk.spring.domain.product.ProductType;
+import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,7 @@ import java.util.List;
 import static com.study.cafekiosk.spring.domain.product.ProductSellingStatus.*;
 import static com.study.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.groups.Tuple.tuple;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("test")
@@ -55,6 +57,14 @@ class ProductServiceTest {
         assertThat(productResponse)
                 .extracting("productNumber", "type", "sellingStatus", "name", "price")
                 .contains("002", HANDMADE, SELLING, "카푸치노", 5000);
+
+        List<Product> products = productRepository.findAll();
+        assertThat(products).hasSize(2)
+                .extracting("productNumber", "type", "sellingStatus", "name", "price")
+                .contains(
+                        tuple("001", HANDMADE, SELLING, "아메리카노", 4000),
+                        tuple("002", HANDMADE, SELLING, "카푸치노", 5000)
+                );
     }
 
     @DisplayName("상품이 하나도 없는 경우 신규 상품을 등록하면 상품번호는 001이다.")
@@ -75,6 +85,13 @@ class ProductServiceTest {
         assertThat(productResponse)
                 .extracting("productNumber", "type", "sellingStatus", "name", "price")
                 .contains("001", HANDMADE, SELLING, "카푸치노", 5000);
+
+        List<Product> products = productRepository.findAll();
+        assertThat(products).hasSize(1)
+                .extracting("productNumber", "type", "sellingStatus", "name", "price")
+                .contains(
+                        tuple("001", HANDMADE, SELLING, "카푸치노", 5000)
+                );
     }
 
     private static Product createProduct(String productNumber, ProductType type, ProductSellingStatus status, String name, int price) {

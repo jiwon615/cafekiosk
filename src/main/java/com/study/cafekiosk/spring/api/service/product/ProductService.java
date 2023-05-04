@@ -22,13 +22,11 @@ public class ProductService {
      * - 해결 방법: productNumber 디비의 필드에다가 unique index 걸고 재시도 로직 추가 / 혹운 UUID 값으로 한다면 동시성 이슈 없이 가능
      */
     public ProductResponse createProduct(ProductCreateRequest request) {
-        return ProductResponse.builder()
-                .productNumber(createNextProductNumber())
-                .type(request.getType())
-                .sellingStatus(request.getSellingStatus())
-                .name(request.getName())
-                .price(request.getPrice())
-                .build();
+        String nextProductNumber = createNextProductNumber();
+        Product product = request.toEntity(nextProductNumber);
+        Product savedProduct = productRepository.save(product);
+
+        return ProductResponse.of(savedProduct);
     }
 
     private String createNextProductNumber() {
