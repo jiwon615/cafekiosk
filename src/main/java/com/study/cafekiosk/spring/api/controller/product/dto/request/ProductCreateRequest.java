@@ -15,6 +15,12 @@ import javax.validation.constraints.Positive;
 @NoArgsConstructor
 public class ProductCreateRequest {
 
+    /***
+     * @NotNull: "", "   " 통과 됨, null 통과안됨
+     * @NotEmpty: "   " 통과 됨
+     * @NotBlank: "", "   ", null 모두 통과 X
+     */
+
     @NotNull(message = "상품 타입은 필수입니다.")
     private ProductType type;
 
