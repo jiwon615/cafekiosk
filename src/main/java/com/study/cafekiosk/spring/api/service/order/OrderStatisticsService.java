@@ -17,9 +17,9 @@ public class OrderStatisticsService {
     private final OrderRepository orderRepository;
     private final MailService mailService;
 
-    public void sendOrderStatisticsMaiil(LocalDate orderDate, String email) {
+    public boolean sendOrderStatisticsMaiil(LocalDate orderDate, String email) {
         // 해당 일자에 결제완료된 주문들을 가져와서
-        List<Order> orders = orderRepository.findOrderBy(
+        List<Order> orders = orderRepository.findOrdersBy(
                 orderDate.atStartOfDay(),
                 orderDate.plusDays(1).atStartOfDay(),
                 OrderStatus.PAYMENT_COMPLETED
@@ -35,10 +35,11 @@ public class OrderStatisticsService {
                 "seg615@naver.com",
                 email,
                 String.format("[매출 통계] %s", orderDate),
-                String.format("총 매출 합계는 %원입니다.", totalAmount));
+                String.format("총 매출 합계는 %d원입니다.", totalAmount));
 
         if (!result) {
             throw new IllegalArgumentException("매출 통계 메일 전송에 실패했습니다.");
         }
+        return true;
     }
 }
