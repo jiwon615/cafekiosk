@@ -1,6 +1,7 @@
 package com.study.cafekiosk.spring.api.service.product;
 
 import com.study.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
+import com.study.cafekiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 import com.study.cafekiosk.spring.api.service.product.response.ProductResponse;
 import com.study.cafekiosk.spring.domain.product.Product;
 import com.study.cafekiosk.spring.domain.product.ProductRepository;
@@ -34,7 +35,7 @@ public class ProductService {
      * - 해결 방법: productNumber 디비의 필드에다가 unique index 걸고 재시도 로직 추가 / 혹운 UUID 값으로 한다면 동시성 이슈 없이 가능
      */
     @Transactional
-    public ProductResponse createProduct(ProductCreateRequest request) {
+    public ProductResponse createProduct(ProductCreateServiceRequest request) {
         String nextProductNumber = createNextProductNumber();
         Product product = request.toEntity(nextProductNumber);
         Product savedProduct = productRepository.save(product);

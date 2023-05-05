@@ -1,12 +1,11 @@
 package com.study.cafekiosk.spring.api.service.product;
 
-import com.study.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
+import com.study.cafekiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 import com.study.cafekiosk.spring.api.service.product.response.ProductResponse;
 import com.study.cafekiosk.spring.domain.product.Product;
 import com.study.cafekiosk.spring.domain.product.ProductRepository;
 import com.study.cafekiosk.spring.domain.product.ProductSellingStatus;
 import com.study.cafekiosk.spring.domain.product.ProductType;
-import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,11 +15,10 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
-import static com.study.cafekiosk.spring.domain.product.ProductSellingStatus.*;
+import static com.study.cafekiosk.spring.domain.product.ProductSellingStatus.SELLING;
 import static com.study.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
-import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("test")
 @SpringBootTest
@@ -44,7 +42,7 @@ class ProductServiceTest {
         Product product1 = createProduct("001", HANDMADE, SELLING, "아메리카노", 4000);
         productRepository.save(product1);
 
-        ProductCreateRequest request = ProductCreateRequest.builder()
+        ProductCreateServiceRequest request = ProductCreateServiceRequest.builder()
                 .type(HANDMADE)
                 .sellingStatus(SELLING)
                 .name("카푸치노")
@@ -71,7 +69,7 @@ class ProductServiceTest {
     @Test
     void createProductWhenProductsAreEmpty() {
         // given
-        ProductCreateRequest request = ProductCreateRequest.builder()
+        ProductCreateServiceRequest request = ProductCreateServiceRequest.builder()
                 .type(HANDMADE)
                 .sellingStatus(SELLING)
                 .name("카푸치노")

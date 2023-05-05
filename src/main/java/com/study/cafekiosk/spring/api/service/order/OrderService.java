@@ -1,6 +1,7 @@
 package com.study.cafekiosk.spring.api.service.order;
 
 import com.study.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
+import com.study.cafekiosk.spring.api.service.order.request.OrderCreateServiceRequest;
 import com.study.cafekiosk.spring.domain.order.Order;
 import com.study.cafekiosk.spring.domain.order.OrderRepository;
 import com.study.cafekiosk.spring.domain.order.response.OrderResponse;
@@ -34,7 +35,7 @@ public class OrderService {
      * 재고 감소 -> 동시성 고민 해볼 것
      * optimistic lock / pessimistic lock / ...
      */
-    public OrderResponse createOrder(OrderCreateRequest request, LocalDateTime registeredDateTime) {
+    public OrderResponse createOrder(OrderCreateServiceRequest request, LocalDateTime registeredDateTime) {
         List<String> productNumbers = request.getProductNumbers();
         List<Product> products = findProductsBy(productNumbers);
 

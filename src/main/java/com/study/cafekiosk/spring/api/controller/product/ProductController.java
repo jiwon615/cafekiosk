@@ -21,12 +21,12 @@ public class ProductController {
 
     @PostMapping("/api/v1/products/new")
     public ApiResponse<ProductResponse> createProduct(@Valid  @RequestBody ProductCreateRequest request) {
-        return ApiResponse.ok(productService.createProduct(request));
+        return ApiResponse.ok(productService.createProduct(request.toServiceRequest()));
     }
 
     @PostMapping("/api/v1/products/new2")
     public ResponseEntity<ProductResponse> createProduct2(@Valid  @RequestBody ProductCreateRequest request) {
-        return ResponseEntity.ok().body(productService.createProduct(request));
+        return ResponseEntity.ok().body(productService.createProduct(request.toServiceRequest()));
     }
 
     @GetMapping("/api/v1/products/selling")
