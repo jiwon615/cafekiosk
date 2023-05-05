@@ -20,18 +20,17 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping("/api/v1/products/new")
-    public ResponseEntity<ProductResponse> createProduct(@Valid  @RequestBody ProductCreateRequest request) {
-        return ResponseEntity.ok().body(productService.createProduct(request));
-    }
-
-    @PostMapping("/api/v1/products/new2")
-    public ApiResponse<ProductResponse> createProduct2(@Valid  @RequestBody ProductCreateRequest request) {
+    public ApiResponse<ProductResponse> createProduct(@Valid  @RequestBody ProductCreateRequest request) {
         return ApiResponse.ok(productService.createProduct(request));
     }
 
+    @PostMapping("/api/v1/products/new2")
+    public ResponseEntity<ProductResponse> createProduct2(@Valid  @RequestBody ProductCreateRequest request) {
+        return ResponseEntity.ok().body(productService.createProduct(request));
+    }
 
     @GetMapping("/api/v1/products/selling")
-    public ResponseEntity<List<ProductResponse>> getSellingProducts() {
-        return ResponseEntity.ok().body(productService.getSellingProducts());
+    public ApiResponse<List<ProductResponse>> getSellingProducts() {
+        return ApiResponse.ok(productService.getSellingProducts());
     }
 }
