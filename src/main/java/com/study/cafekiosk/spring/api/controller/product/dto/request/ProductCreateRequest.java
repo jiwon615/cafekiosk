@@ -5,8 +5,10 @@ import com.study.cafekiosk.spring.domain.product.ProductSellingStatus;
 import com.study.cafekiosk.spring.domain.product.ProductType;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class ProductCreateRequest {
 
     private ProductType type;

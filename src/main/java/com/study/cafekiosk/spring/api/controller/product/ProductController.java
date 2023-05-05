@@ -18,9 +18,8 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping("/api/v1/products/new")
-    public ResponseEntity<?> createProduct(@RequestBody ProductCreateRequest request) {
-        productService.createProduct(request);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductCreateRequest request) {
+        return ResponseEntity.ok().body(productService.createProduct(request));
     }
 
     @GetMapping("/api/v1/products/selling")
