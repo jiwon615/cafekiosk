@@ -6,10 +6,7 @@ import com.study.cafekiosk.spring.domain.history.MailSendHistoryRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Spy;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +22,7 @@ class MailServiceTest {
      * @Spy : 일부만 stubbing 하고싶을 때 사용 (객체에서 일부는 진짜 객체를 쓰고 싶고 특정 부분만 가짜 객체 쓰고자 할 때 spy 사용)
      * @Mock: 가짜 객체를 사용하여, 해당 객체의 전체를 모두 가짜 객체로 사용하게 됨
      */
-//    @Mock
+    @Mock
 //    @Spy
     private MailSendClient mailSendClient;
 
@@ -48,10 +45,19 @@ class MailServiceTest {
 
 //        MailService mailService = new MailService(mailSendClient, mailSendHistoryRepository);
 
-        // stubbing
-        when(mailSendClient.sendMail(anyString(), anyString(), anyString(), anyString()))
+        /**
+         * stubbing
+         *
+         * Mochito.when().thenReturn()과 BDDMockito.given().willReturn()
+         * - 둘 다 동일하게 동작
+         * - BDDMockito가 given() 이름을 가져 더 역할에 자연스럽고, 내부적으로 Mockito를 상속받음
+         *
+         */
+        Mockito.when(mailSendClient.sendMail(anyString(), anyString(), anyString(), anyString()))
                 .thenReturn(true);
 
+        BDDMockito.given(mailSendClient.sendMail(anyString(), anyString(), anyString(), anyString()))
+                .willReturn(true);
         /*
          * @Spy 사용 하게 되면 stubbing 시 사용한 위와 같은 when().thenReturn() 형식이 아닌 아래처럼 사용할 것
          * (sendMail() 부분만 가짜 객체를 사용하게 됨)
@@ -69,5 +75,4 @@ class MailServiceTest {
         Mockito.verify(mailSendHistoryRepository, times(1)).save(any(MailSendHistory.class));
 
     }
-
 }
