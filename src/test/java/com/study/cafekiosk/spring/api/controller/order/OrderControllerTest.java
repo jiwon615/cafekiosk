@@ -1,6 +1,7 @@
 package com.study.cafekiosk.spring.api.controller.order;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.study.cafekiosk.spring.ControllerTestSupport;
 import com.study.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
 import com.study.cafekiosk.spring.api.service.order.OrderService;
 import org.junit.jupiter.api.DisplayName;
@@ -18,8 +19,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = OrderController.class)
-class OrderControllerTest {
+//@WebMvcTest(controllers = OrderController.class)
+class OrderControllerTest extends ControllerTestSupport {
 
     @Autowired
     private MockMvc mockMvc;

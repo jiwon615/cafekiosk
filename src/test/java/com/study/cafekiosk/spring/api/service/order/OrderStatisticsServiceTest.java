@@ -1,5 +1,6 @@
 package com.study.cafekiosk.spring.api.service.order;
 
+import com.study.cafekiosk.spring.IntegrationTestSupport;
 import com.study.cafekiosk.spring.client.mail.MailSendClient;
 import com.study.cafekiosk.spring.domain.history.MailSendHistory;
 import com.study.cafekiosk.spring.domain.history.MailSendHistoryRepository;
@@ -28,8 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 
 // 메일전송 같이 긴 작업이 소요되는 작업의 경우 transactional 안거는 것이 좋다!!
-@SpringBootTest
-class OrderStatisticsServiceTest {
+class OrderStatisticsServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private OrderStatisticsService orderStatisticsService;
@@ -47,8 +47,8 @@ class OrderStatisticsServiceTest {
     private MailSendHistoryRepository mailSendHistoryRepository;
 
     // 실제 메일전송은 네트워크를 타는 것으로 테스트에 불필요한 과정이므로, 이런 경우 mockBean으로 가짜 객체 주입하여 사용
-    @MockBean
-    private MailSendClient mailSendClient;
+//    @MockBean
+//    private MailSendClient mailSendClient;
 
     @AfterEach
     void tearDown() {

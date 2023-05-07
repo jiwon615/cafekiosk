@@ -1,5 +1,6 @@
 package com.study.cafekiosk.spring.api.service.order;
 
+import com.study.cafekiosk.spring.IntegrationTestSupport;
 import com.study.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
 import com.study.cafekiosk.spring.api.service.order.request.OrderCreateServiceRequest;
 import com.study.cafekiosk.spring.domain.order.OrderRepository;
@@ -30,10 +31,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.groups.Tuple.tuple;
 import static org.junit.jupiter.api.Assertions.*;
 
-@ActiveProfiles("test")
-@SpringBootTest
 //@Transactional
-class OrderServiceTest {
+class OrderServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private OrderService orderService;

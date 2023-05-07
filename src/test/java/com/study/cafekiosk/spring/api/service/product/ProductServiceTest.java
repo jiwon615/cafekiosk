@@ -1,5 +1,6 @@
 package com.study.cafekiosk.spring.api.service.product;
 
+import com.study.cafekiosk.spring.IntegrationTestSupport;
 import com.study.cafekiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 import com.study.cafekiosk.spring.api.service.product.response.ProductResponse;
 import com.study.cafekiosk.spring.domain.product.Product;
@@ -18,9 +19,7 @@ import static com.study.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
 
-@ActiveProfiles("test")
-@SpringBootTest
-class ProductServiceTest {
+class ProductServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductService productService;

@@ -1,6 +1,7 @@
 package com.study.cafekiosk.spring.api.controller.product;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.study.cafekiosk.spring.ControllerTestSupport;
 import com.study.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
 import com.study.cafekiosk.spring.api.service.product.ProductService;
 import com.study.cafekiosk.spring.api.service.product.response.ProductResponse;
@@ -23,17 +24,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = ProductController.class) // controller 관련 빈들만 올릴 수 있음
-class ProductControllerTest {
+//@WebMvcTest(controllers = ProductController.class) // controller 관련 빈들만 올릴 수 있음
+class ProductControllerTest extends ControllerTestSupport {
 
-    @Autowired
-    private MockMvc mockMvc; // servce layer 하위를 모두 mocking 처리하도록 도와주는 MockMvc 프레임워크
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean // 컨테이너에 mockito로 만든 mock 객체를 넣어줌
-    private ProductService productService;
+//    @Autowired
+//    private MockMvc mockMvc; // servce layer 하위를 모두 mocking 처리하도록 도와주는 MockMvc 프레임워크
+//
+//    @Autowired
+//    private ObjectMapper objectMapper;
+//
+//    @MockBean // 컨테이너에 mockito로 만든 mock 객체를 넣어줌
+//    private ProductService productService;
 
     @DisplayName("신규 상품을 등록한다.")
     @Test

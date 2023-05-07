@@ -1,10 +1,13 @@
 package com.study.cafekiosk.spring.domain.product;
 
+import com.study.cafekiosk.spring.IntegrationTestSupport;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,10 +16,10 @@ import static com.study.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
-@ActiveProfiles("test")
 //@SpringBootTest // 스프링 서버 띄움
-@DataJpaTest // 스프링 서버 띄움; jpa 관련 빈만 주입 -> lighter
-class ProductRepositoryTest {
+//@DataJpaTest // 스프링 서버 띄움; jpa 관련 빈만 주입 -> lighter; @Transactional도 포함하여 자연스럽게 트랜잭션도 사용 가능
+@Transactional
+class ProductRepositoryTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductRepository productRepository;
