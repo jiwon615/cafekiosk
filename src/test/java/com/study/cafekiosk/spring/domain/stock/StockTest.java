@@ -55,23 +55,6 @@ class StockTest {
                 .hasMessage("차감할 재고 수량이 없습니다.");
     }
 
-
-    /**
-     * Dynamic 테스트 템플릿 예시
-     */
-    @DisplayName("")
-    @TestFactory
-    Collection<DynamicTest> dynamicTest() {
-        return List.of(
-                DynamicTest.dynamicTest("", () -> {
-
-                }),
-                DynamicTest.dynamicTest("", () -> {
-
-                })
-        );
-    }
-
     @DisplayName("재고 차감 시나리오")
     @TestFactory
     Collection<DynamicTest> stockDeductionDynamicTest() {
