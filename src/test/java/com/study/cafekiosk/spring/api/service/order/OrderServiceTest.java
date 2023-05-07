@@ -50,13 +50,30 @@ class OrderServiceTest {
     private StockRepository stockRepository;
 
 
+    /**
+     * deleteAllInBatch() vs deleteAll();
+     *
+     * deleteAllInBatch()
+     *  - pro: 각 테이블 한번에 데이터 깔끔하기 지울 수 있음
+     *  - con: 외래키 가진 테이블을 먼저 지워줘야 함 (지우는 순서가 중요함)
+     *
+     *  deleteAll()
+     *   - pro: 연관테이블(OrderProduct테이블) 굳이 안지워도,Product 지울때 같이 외래키 맺는 테이블들 자동으로 지워줌
+     *   - con : 각 테이블 전체 한번 조회후, 데이터 건수별로 where id = "" 걸어서 delete쿼리 많이 날아감
+     *
+     */
+
     // @Transactional이 있으면 아래는 없어도 된다!
     @AfterEach
     void tearDown() {
-        orderProductRepository.deleteAllInBatch();
+        orderProductRepository.deleteAllInBatch(); // 외래키를 가진 테이블을 먼저 지워야 상품/주문 테이블 지울 수 있어서 순서가 젤 위
         productRepository.deleteAllInBatch();
-        orderRepository.deleteAllInBatch();
+//        orderRepository.deleteAllInBatch();
         stockRepository.deleteAllInBatch();
+
+//        orderProductRepository.deleteAll(); // 외래키를 가진 테이블을 먼저 지워야 상품/주문 테이블 지울 수 있어서 순서가 젤 위
+//        productRepository.deleteAll();
+//        orderRepository.deleteAll();
     }
 
     @DisplayName("주분번호 리스트를 받아 주문을 생성한다.")
