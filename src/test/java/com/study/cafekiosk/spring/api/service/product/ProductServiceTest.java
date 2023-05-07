@@ -6,9 +6,7 @@ import com.study.cafekiosk.spring.domain.product.Product;
 import com.study.cafekiosk.spring.domain.product.ProductRepository;
 import com.study.cafekiosk.spring.domain.product.ProductSellingStatus;
 import com.study.cafekiosk.spring.domain.product.ProductType;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -29,6 +27,19 @@ class ProductServiceTest {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @BeforeAll
+    static void beforeAll() {
+        // before class
+    }
+
+    @BeforeEach
+    void setUp() {
+        // before method
+
+        // 각 테스트 입장에서 봤을 때: 아예 몰라도 테스트 내용을 이해하는 데에 문제가 없는가?
+        // 수정해도 모든 테스트에 영향을 주지 않는가?
+    }
 
     @AfterEach
     void tearDown() {
@@ -92,6 +103,7 @@ class ProductServiceTest {
                 );
     }
 
+    // 테스트 클래스마다 꼭 필요한 필드만 명시하여 빌더 만들기
     private static Product createProduct(String productNumber, ProductType type, ProductSellingStatus status, String name, int price) {
         return Product.builder()
                 .productNumber(productNumber)
