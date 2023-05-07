@@ -31,6 +31,9 @@ dependencies {
 	// h2
 	runtimeOnly 'com.h2database:h2'
 
+	// Guava
+	implementation 'com.google.guava:guava:31.1-jre'
+
 	// test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
